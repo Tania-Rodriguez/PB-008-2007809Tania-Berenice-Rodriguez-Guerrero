@@ -16,9 +16,9 @@ void limpiar();
 void archivo();
 
 
-int agendar, * cant, * numcita;
-float* subtotal, * total, *peutra;
-string* nompac, * hora, * nomtra, * desc;
+int agendar, * cant, * numcita, f, * hora;
+float* subtotal, * total, * peutra;
+string* nompac, * nomtra, * desc;
 
 
 int main()
@@ -31,7 +31,7 @@ int main()
 	cout << "3: Eliminar cita" << endl;
 	cout << "4: Lista de citas vigentes" << endl;
 	cout << "5: Limpiar pantalla" << endl;
-	cout << "6: Salir" << endl;
+	cout << "6: Hacer archivo" << endl;
 	cin >> opc;
 
 	switch (opc)
@@ -58,25 +58,28 @@ int main()
 		break;
 
 	case 5:
-		system("cls"); //system("clear");
+		system("cls"); 
 		return main();
 		break;
 
 	case 6:
 		archivo();
 		break;
+
+	default:
+		cout << "No valido vuelva a intantarlo" << endl;
 	}
 }
 
 void Agendar()
 {
-	system("cls"); 
+	system("cls");
 	cout << "Digite el numero de citas que desea dar de alta:   " << endl;
 	cin >> agendar;
 	cout << "\n";
 	numcita = new int[agendar];
 	nompac = new string[agendar];
-	hora = new string[agendar];
+	hora = new int[agendar];
 	nomtra = new string[agendar];
 	desc = new string[agendar];
 	peutra = new float[agendar];
@@ -87,20 +90,34 @@ void Agendar()
 	for (int i = 0; i < agendar; i++)
 	{
 		system("cls");
-		while (getchar() != '\n'); //se vacia el buffer o el espacio o cin.ignore
+		while (getchar() != '\n'); 
 		cout << "inserte nombre del paciente" << endl;
-		getline(cin, nompac[i]); //permite los espacios en el nombre
-		cout << "inserte hora" << endl;
-		getline(cin, hora[i]);
-		cout << "inserte nombre del tratamiento" << endl;
-		getline(cin, nomtra[i]);
-		cout << "inserte descripcion" << endl;
-		getline(cin, desc[i]);
-		cout << "inserte precio unitario del tratamiento" << endl;
-		cin >> peutra[i];
-		cout << "inserte cantidad del tratamiento" << endl;
-		cin >> cant[i];
+		getline(cin, nompac[i]); 
+		do {
+			f = 0;
+			cout << "inserte hora, sin :" << endl;
+			cin >> hora[i];
+			if (hora[i]>0 && hora[i]<2400)
+			{
 
+			}
+			else {
+				cout << "no es posible" << endl;
+				f = 2;
+			}
+		} while (f == 2);
+
+			cout << " " << endl;
+			getline(cin, nomtra[i]); 
+			cout << "inserte nombre del tratamiento" << endl;
+			getline(cin, nomtra[i]);
+			cout << "inserte descripcion" << endl;
+			getline(cin, desc[i]);
+			cout << "inserte precio unitario del tratamiento" << endl;
+			cin >> peutra[i];
+			cout << "inserte cantidad del tratamiento" << endl;
+			cin >> cant[i];
+			
 
 	}
 }
@@ -112,7 +129,7 @@ void modificar()
 	cout << "ingrese el numero de cita que desea modificar:   ";
 	cin >> j;
 	cout << "\n";
-	j = j - 1; 
+	j = j - 1;
 	cout << "Seleccione que desea modificar" << endl;
 	cout << "1: Nombre del paciente" << endl;
 	cout << "2: Hora" << endl;
@@ -135,9 +152,8 @@ void modificar()
 	case 2:
 		for (int i = j; i == j; i++)
 		{
-			while (getchar() != '\n');
 			cout << "Ingrese nueva hora" << endl;
-			getline(cin, hora[i]);
+			cin >> hora[i];
 		}
 		break;
 
@@ -174,115 +190,116 @@ void modificar()
 			cin >> cant[i];
 		}
 
-
+	default:
+		cout << "No valido vuelva a intantarlo" << endl;
 
 	}
 }
 
-	void eliminar()
+void eliminar()
+{
+	system("cls");
+	int j;
+	cout << "ingrese la cita que desea eliminar:   ";
+	cin >> j;
+	cout << "\n";
+	j = j - 1;
+	for (int i = j; i == j; i++)
 	{
-		system("cls"); 
-		int j;
-		cout << "ingrese la cita que desea eliminar:   ";
-		cin >> j;
-		cout << "\n";
-		j = j - 1;
-		for (int i = j; i == j; i++)
-		{
-			cout << "----Cita eliminada----" << j + 1 << endl;
+		cout << "----Cita eliminada----" << j + 1 << endl;
 
-			numcita[i] = 0;
-			nompac[i] = " ";
-			hora[i] = " ";
-			nomtra[i] = " ";
-			desc[i] = " ";
-			peutra[i] = 0;
-			cant[i] = 0;
-			subtotal[i] = 0;
-			total[i] = 0;
-		}
-		system("pause");
+		numcita[i] = 0;
+		nompac[i] = " ";
+		hora[i] = 0;
+		nomtra[i] = " ";
+		desc[i] = " ";
+		peutra[i] = 0;
+		cant[i] = 0;
+		subtotal[i] = 0;
+		total[i] = 0;
 	}
+	system("pause");
+}
 
-	void lista()
+void lista()
+{
+	system("cls");
+	for (int i = 0; i < agendar; i++)
 	{
-		system("cls");
-		for (int i = 0; i < agendar; i++)
+		if (numcita[i] == 0)
 		{
-			if (numcita[i] == 0)
-			{
-				cout << "---CITA ELIMINADO---" << i + 1 << endl;
-			}
-			else
-			{
-				cout << "CITA:             " << i + 1 << endl;
-				cout << "NOMBRE:           " << nompac[i] << endl;
-				cout << "HORA:             " << hora[i] << endl;
-				cout << "TRATAMIENTO:      " << nomtra[i] << endl;
-				cout << "DESCRIPCION:      " << desc[i] << endl;
-				cout << "PRECIO UNITARIO:  " << peutra[i] << endl;
-				cout << "CANTIDAD:         " << cant[i] << endl;
-				subtotal[i] = peutra[i] * cant[i];
-				cout << "SUBTOTAL:         " << subtotal[i] << endl;
-				total[i] = subtotal[i] * 1.16;
-				cout << "TOTAL:            " << total[i] << endl;
-				cout << "\n";
-			}
+			cout << "---CITA ELIMINADO---" << i + 1 << endl;
 		}
-		system("pause");
-	}
-
-	void archivo()
-	 {
-		ofstream archivo; 
-		string nombrearchivo;
-		int texto;
-		string texto2;
-
-		nombrearchivo = "Citas vigentes";
-
-		archivo.open(nombrearchivo.c_str(), ios::out);
-
-		if (archivo.fail())
+		else
 		{
-			cout << "ERROR NO SE PUDO CREAR EL ARCHIVO";
-			exit(1);
-		}
-
-		archivo << "CITA:" << "\t" << "\t";
-		archivo << "NOMBRE:" << "\t" << "\t";
-		archivo << "HORA:" << "\t" << "\t";
-		archivo << "TRATAMIENTO:" << "\t" << "\t";
-		archivo << "DESCRIPCION:" << "\t";
-	    archivo << "PRECIO UNITARIO:" << "\t";
-		archivo << "CANTIDAD:" << "\t";
-		archivo << "SUBTOTAL" << "\t";
-		archivo << "TOTAL:" << "\n";
-
-		for (int i = 0; i < agendar; i++)
-		{
-			texto = i + 1;
-			archivo << texto << "\t" << "\t";
-			texto2 = nompac[i];
-			archivo << texto2 << "\t" << "\t";
-			texto2 = hora[i];
-			archivo << texto2 << "\t " << "\t";
-			texto2 = nomtra[i];
-			archivo << texto2 << "\t " << "\t";
-			texto2 = desc[i];
-			archivo << texto2 << "\t " << "\t" << "\t ";
-	    	texto = peutra[i];
-			archivo << texto << "\t" << "\t";
-	 	 	texto = cant[i];
-			archivo << texto << "\t" << "\t";
+			cout << "CITA:             " << i + 1 << endl;
+			cout << "NOMBRE:           " << nompac[i] << endl;
+			cout << "HORA:             " << hora[i] << endl;
+			cout << "TRATAMIENTO:      " << nomtra[i] << endl;
+			cout << "DESCRIPCION:      " << desc[i] << endl;
+			cout << "PRECIO UNITARIO:  " << peutra[i] << endl;
+			cout << "CANTIDAD:         " << cant[i] << endl;
 			subtotal[i] = peutra[i] * cant[i];
-	        texto = subtotal[i];
-			archivo << texto << "\t" << "\t";
-	        total[i] = subtotal[i] * 1.16;
-	        texto = total[i];
-			archivo << texto << "\t" << "\n";
+			cout << "SUBTOTAL:         " << subtotal[i] << endl;
+			total[i] = subtotal[i] * 1.16;
+			cout << "TOTAL:            " << total[i] << endl;
+			cout << "\n";
 		}
+	}
+	system("pause");
+}
+
+void archivo()
+{
+	ofstream archivo;
+	string nombrearchivo;
+	int texto;
+	string texto2;
+
+	nombrearchivo = "Citas vigentes";
+
+	archivo.open(nombrearchivo.c_str(), ios::out);
+
+	if (archivo.fail())
+	{
+		cout << "ERROR NO SE PUDO CREAR EL ARCHIVO";
+		exit(1);
+	}
+
+	archivo << "CITA:" << "\t" << "\t";
+	archivo << "NOMBRE:" << "\t" << "\t";
+	archivo << "HORA:" << "\t" << "\t";
+	archivo << "TRATAMIENTO:" << "\t" << "\t";
+	archivo << "DESCRIPCION:" << "\t";
+	archivo << "PRECIO UNITARIO:" << "\t";
+	archivo << "CANTIDAD:" << "\t";
+	archivo << "SUBTOTAL" << "\t";
+	archivo << "TOTAL:" << "\n";
+
+	for (int i = 0; i < agendar; i++)
+	{
+		texto = i + 1;
+		archivo << texto << "\t" << "\t";
+		texto2 = nompac[i];
+		archivo << texto2 << "\t" << "\t";
+		texto = hora[i];
+		archivo << texto << "\t " << "\t";
+		texto2 = nomtra[i];
+		archivo << texto2 << "\t " << "\t";
+		texto2 = desc[i];
+		archivo << texto2 << "\t " << "\t" << "\t ";
+		texto = peutra[i];
+		archivo << texto << "\t" << "\t";
+		texto = cant[i];
+		archivo << texto << "\t" << "\t";
+		subtotal[i] = peutra[i] * cant[i];
+		texto = subtotal[i];
+		archivo << texto << "\t" << "\t";
+		total[i] = subtotal[i] * 1.16;
+		texto = total[i];
+		archivo << texto << "\t" << "\n";
+	}
 
 
-		archivo.close();
-	 }
+	archivo.close();
+}
