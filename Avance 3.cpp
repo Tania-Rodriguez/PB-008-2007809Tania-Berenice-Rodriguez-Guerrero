@@ -3,7 +3,7 @@
 #include <string.h>
 #include <string>
 #include <fstream>
-#include<stdlib.h>// funcione new y delete
+#include<stdlib.h>
 #include <vector>
 
 using namespace std;
@@ -15,7 +15,6 @@ void lista();
 void limpiar();
 void archivo();
 
-//falta limiar pantallas y formato
 
 int agendar, * cant, * numcita;
 float* subtotal, * total, *peutra;
@@ -115,7 +114,7 @@ void modificar()
 	cout << "ingrese el numero de cita que desea modificar:   ";
 	cin >> j;
 	cout << "\n";
-	j = j - 1; // esto debido a que i inicia en 0
+	j = j - 1; 
 	cout << "Seleccione que desea modificar" << endl;
 	cout << "1: Nombre del paciente" << endl;
 	cout << "2: Hora" << endl;
@@ -237,7 +236,7 @@ void modificar()
 
 	void archivo()
 	 {
-		ofstream archivo; //clase ifstream para leer archivos
+		ofstream archivo; 
 		string nombrearchivo;
 		int texto;
 		string texto2;
