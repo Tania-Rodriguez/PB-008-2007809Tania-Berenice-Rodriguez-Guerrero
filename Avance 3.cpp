@@ -100,8 +100,6 @@ void Agendar()
 		cin >> peutra[i];
 		cout << "inserte cantidad del tratamiento" << endl;
 		cin >> cant[i];
-		//falta agregar subtotal y total con el iva IVA (16%) Se calcula en base al subtotal. Total (1250+16%)=1450 
-		//* subtotal, * iva, * total
 
 
 	}
