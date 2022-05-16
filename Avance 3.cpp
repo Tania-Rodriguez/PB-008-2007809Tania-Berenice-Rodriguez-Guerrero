@@ -31,7 +31,7 @@ int main()
 	cout << "3: Eliminar cita" << endl;
 	cout << "4: Lista de citas vigentes" << endl;
 	cout << "5: Limpiar pantalla" << endl;
-	cout << "6: Hacer archivo" << endl;
+	cout << "6: Salir" << endl;
 	cin >> opc;
 
 	switch (opc)
